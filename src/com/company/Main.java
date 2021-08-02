@@ -10,7 +10,7 @@ public class Main {
         Formatter f = new Formatter();
         Scanner in = new Scanner(System.in); //test
         System.out.println("Pls enter first value"); //test
-        double value1 = in.nextInt();
+        double value1 = in.nextInt(); //test
         System.out.println("Pls enter second value");
         double value2 = in.nextInt();
         System.out.println("Pls enter operator sum(+),mult(*),sub(-) or div(/)");
