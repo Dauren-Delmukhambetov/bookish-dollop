@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         double result = 0;
         Formatter f = new Formatter();
-        Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in); //test
         System.out.println("Pls enter first value");
         double value1 = in.nextInt();
         System.out.println("Pls enter second value");
