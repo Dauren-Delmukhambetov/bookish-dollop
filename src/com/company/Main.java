@@ -9,7 +9,7 @@ public class Main {
         double result = 0;
         Formatter f = new Formatter();
         Scanner in = new Scanner(System.in); //test
-        System.out.println("Pls enter first value");
+        System.out.println("Pls enter first value"); //test
         double value1 = in.nextInt();
         System.out.println("Pls enter second value");
         double value2 = in.nextInt();
