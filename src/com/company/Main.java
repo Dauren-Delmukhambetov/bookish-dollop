@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.Formatter;
 import java.util.Scanner;
 
 public class Main {
