@@ -18,13 +18,14 @@ public class Main {
 
         String[] parametersForFirstArray;
         parametersForFirstArray = arrayParametersForFirstArray.split(" ");
+        validateOfNumberOfArray(arrayParametersForFirstArray);
         double initialValueOfFirstArray = Double.parseDouble(parametersForFirstArray[0]);
         int sizeOfFirstArray = Integer.parseInt(parametersForFirstArray[1]);
         double stepOfFirstArray = Double.parseDouble(parametersForFirstArray[2]);
         String operatorOfFirstArray = parametersForFirstArray[3];
-
         String[] parametersForSecondArray;
         parametersForSecondArray = arrayParametersForSecondArray.split(" ");
+        validateOfNumberOfArray(arrayParametersForSecondArray);
         double initialValueOfSecondArray = Double.parseDouble(parametersForSecondArray[0]);
         int sizeOfSecondArray = Integer.parseInt(parametersForSecondArray[1]);
         double stepOfSecondArray = Double.parseDouble(parametersForSecondArray[2]);
@@ -43,7 +44,6 @@ public class Main {
         } else
             System.out.println("Please enter the same size of arrays");
     }
-
 
     public static double[] createArray(double initialValue, int sizeOfArray, double stepOfArray, String incrementOperator) {
         double[] array = new double[sizeOfArray];
@@ -80,6 +80,13 @@ public class Main {
             }
         }
         return calculatedArray;
+    }
+
+    public static void validateOfNumberOfArray(String arrays) {
+        if (arrays.length() != 4) {
+            System.err.println("Please enter all values");
+            System.exit(0);
+        }
     }
 }
 
