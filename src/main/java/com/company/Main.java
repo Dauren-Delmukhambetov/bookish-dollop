@@ -1,137 +1,85 @@
 package com.company;
 
-import com.sun.source.tree.SwitchTree;
-
 import java.util.Arrays;
-import java.util.Formatter;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        System.out.println("Pls enter initial value of 1st array");
-        final var inValueForFirstArray = in.nextInt();
-        System.out.println("Pls enter size of arrays");
-        var sizeOfArrays = in.nextInt();
-        System.out.println("Pls enter step of 1st array");
-        var stepForFirstArray = in.nextDouble();
-        System.out.println("Pls enter increment operator of 1st array (+),(*),(-),(^) or (/)");
-        var operatorForFirstArray = in.nextLine();
-        System.out.println("Pls enter initial value of 2nd array");
-        var inValueForSecondArray = in.nextDouble();
-        System.out.println("Pls enter step of 2nd array");
-        var stepForSecondArray = in.nextInt();
-        System.out.println("Pls enter increment operator of 2nd array (+),(*),(-),(^) or (/)");
-        var operatorForSecondArray = in.nextLine();
+        System.out.println("Pls enter through space parameters for first Array: ");
+        System.out.println("initial value, size of array, step of array, increment operator((+),(*),(-),(^) or (/))");
+        var arrayParametersForFirstArray = in.nextLine();
+        System.out.println("Pls enter through space parameters for second Array: ");
+        System.out.println("initial value, size of array, step of array, increment operator((+),(*),(-),(^) or (/))");
+        var arrayParametersForSecondArray = in.nextLine();
         System.out.println("Pls enter operator to calculate the third array (+),(*),(-),(^) or (/)");
-        var GeneralOperator = in.nextLine();
-        boolean x = false;
+        var generalOperator = in.nextLine();
+
+        String[] parametersForFirstArray;
+        parametersForFirstArray = arrayParametersForFirstArray.split(" ");
+        double initialValueOfFirstArray = Double.parseDouble(parametersForFirstArray[0]);
+        int sizeOfFirstArray = Integer.parseInt(parametersForFirstArray[1]);
+        double stepOfFirstArray = Double.parseDouble(parametersForFirstArray[2]);
+        String operatorOfFirstArray = parametersForFirstArray[3];
+
+        String[] parametersForSecondArray;
+        parametersForSecondArray = arrayParametersForSecondArray.split(" ");
+        double initialValueOfSecondArray = Double.parseDouble(parametersForSecondArray[0]);
+        int sizeOfSecondArray = Integer.parseInt(parametersForSecondArray[1]);
+        double stepOfSecondArray = Double.parseDouble(parametersForSecondArray[2]);
+        String operatorOfSecondArray = parametersForSecondArray[3];
+
+        double[] firstArray = createArray(initialValueOfFirstArray, sizeOfFirstArray, stepOfFirstArray, operatorOfFirstArray);
+        double[] secondArray = createArray(initialValueOfSecondArray, sizeOfSecondArray, stepOfSecondArray, operatorOfSecondArray);
+
+        System.out.println("First Array" + Arrays.toString(firstArray));
+        System.out.println("Second array" + Arrays.toString(secondArray));
+
+        if (sizeOfFirstArray == sizeOfSecondArray) {
+
+            System.out.println("The result of " + generalOperator + " entered arrays is " + Arrays.toString(CalculateArrays(firstArray, secondArray, generalOperator)));
+
+        } else
+            System.out.println("Please enter the same size of arrays");
+    }
 
 
-        double[] array1 = new double[sizeOfArrays];
-        array1[0] = inValueForFirstArray;
-
-        for (int i = 1; i < sizeOfArrays; i++) {
-            switch (operatorForFirstArray) {
-                case "+":
-                    array1[i] = array1[i - 1] + stepForFirstArray;
-                    break;
-                case "-":
-                    array1[i] = array1[i - 1] - stepForFirstArray;
-                    break;
-                case "*":
-                    array1[i] = array1[i - 1] * stepForFirstArray;
-                    break;
-                case "/":
-                    array1[i] = array1[i - 1] / stepForFirstArray;
-                    break;
-                case "^":
-                    array1[i] = Math.pow(array1[i - 1], stepForFirstArray);
-                    break;
-                default:
-                    x = true;
-                    break;
-
-            }
-            if (x) {
-                System.out.println("Error: Wrong operator for first array");
-                break;
-
-
+    public static double[] createArray(double initialValue, int sizeOfArray, double stepOfArray, String incrementOperator) {
+        double[] array = new double[sizeOfArray];
+        array[0] = initialValue;
+        for (int i = 1; i < array.length; i++) {
+            switch (incrementOperator) {
+                case "+" -> array[i] = array[i - 1] + stepOfArray;
+                case "-" -> array[i] = array[i - 1] - stepOfArray;
+                case "*" -> array[i] = array[i - 1] * stepOfArray;
+                case "/" -> array[i] = array[i - 1] / stepOfArray;
+                case "^" -> array[i] = Math.pow(array[i - 1], stepOfArray);
+                default -> {
+                    System.err.println("Error: Wrong operator for array");
+                    System.exit(0);
+                }
             }
         }
-        String array1String = Arrays.toString(array1);
-        System.out.println("You enter 1st array  " + array1String);
+        return array;
+    }
 
-
-        double[] array2 = new double[sizeOfArrays];
-        array2[0] = inValueForSecondArray;
-        for (int i = 1; i < array2.length; i++) {
-            switch (operatorForSecondArray) {
-                case "+":
-                    array2[i] = array2[i - 1] + stepForSecondArray;
-                    break;
-                case "-":
-                    array2[i] = array2[i - 1] - stepForSecondArray;
-                    break;
-                case "*":
-                    array2[i] = array2[i - 1] * stepForSecondArray;
-                    break;
-                case "/":
-                    array2[i] = array2[i - 1] / stepForSecondArray;
-                    break;
-                case "^":
-                    array2[i] = Math.pow(array1[i - 1], stepForSecondArray);
-                    break;
-                default:
-                    i = sizeOfArrays;
-                    System.out.println("Error: Wrong operator for second array");
-                    break;
+    public static double[] CalculateArrays(double[] arrayFirst, double[] arraySecond, String operator) {
+        double[] calculatedArray = new double[arrayFirst.length];
+        for (int i = 0; i < calculatedArray.length; i++) {
+            switch (operator) {
+                case "+" -> calculatedArray[i] = arrayFirst[i] + arraySecond[i];
+                case "-" -> calculatedArray[i] = arrayFirst[i] - arraySecond[i];
+                case "*" -> calculatedArray[i] = arrayFirst[i] * arraySecond[i];
+                case "/" -> calculatedArray[i] = arrayFirst[i] / arraySecond[i];
+                case "^" -> calculatedArray[i] = Math.pow(arrayFirst[i], arraySecond[i]);
+                default -> {
+                    System.err.println("Error: Wrong general operator for second array");
+                    System.exit(0);
+                }
             }
-
-
         }
-        String array2String = Arrays.toString(array2);
-        System.out.println("You enter 2nd array" + array2String);
-
-        double[] array3 = new double[sizeOfArrays];
-        switch (GeneralOperator) {
-            case "+":
-                for (int i = 0; i < array1.length; i++) {
-                    array3[i] = array1[i] + array2[i];
-                }
-                break;
-            case "-":
-                for (int i = 0; i < array1.length; i++) {
-                    array3[i] = array1[i] - array2[i];
-                }
-                break;
-            case "*":
-                for (int i = 0; i < array1.length; i++) {
-                    array3[i] = array1[i] * array2[i];
-                }
-                break;
-            case "/":
-                for (int i = 0; i < array1.length; i++) {
-                    array3[i] = array1[i] / array2[i];
-                }
-                break;
-            case "^":
-                for (int i = 0; i < array1.length; i++) {
-                    array3[i] = Math.pow(array1[i], array2[i]);
-                }
-            default:
-                System.out.println("Error: Wrong general operator");
-                System.exit(0);
-
-                break;
-
-
-        }
-        String array3String = Arrays.toString(array3);
-        System.out.println("The result of " + GeneralOperator + " entered arrays is " + array3String);
-
-
+        return calculatedArray;
     }
 }
+
