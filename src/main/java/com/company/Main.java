@@ -11,21 +11,21 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("Pls enter initial value of 1st array");
-        var inValueForFirstArray = in.nextInt();
+        final var inValueForFirstArray = in.nextInt();
         System.out.println("Pls enter size of arrays");
         var sizeOfArrays = in.nextInt();
         System.out.println("Pls enter step of 1st array");
-        var stepForFirstArray = in.nextInt();
-        System.out.println("Pls enter increment operator of 1st array (+),(*),(-) or (/)");
-        String operatorForFirstArray = in.next();
+        var stepForFirstArray = in.nextDouble();
+        System.out.println("Pls enter increment operator of 1st array (+),(*),(-),(^) or (/)");
+        var operatorForFirstArray = in.nextLine();
         System.out.println("Pls enter initial value of 2nd array");
-        var inValueForSecondArray = in.nextInt();
+        var inValueForSecondArray = in.nextDouble();
         System.out.println("Pls enter step of 2nd array");
         var stepForSecondArray = in.nextInt();
         System.out.println("Pls enter increment operator of 2nd array (+),(*),(-),(^) or (/)");
-        String operatorForSecondArray = in.next();
+        var operatorForSecondArray = in.nextLine();
         System.out.println("Pls enter operator to calculate the third array (+),(*),(-),(^) or (/)");
-        String GeneralOperator = in.next();
+        var GeneralOperator = in.nextLine();
         boolean x = false;
 
 
@@ -46,6 +46,9 @@ public class Main {
                 case "/":
                     array1[i] = array1[i - 1] / stepForFirstArray;
                     break;
+                case "^":
+                    array1[i] = Math.pow(array1[i - 1], stepForFirstArray);
+                    break;
                 default:
                     x = true;
                     break;
@@ -64,7 +67,7 @@ public class Main {
 
         double[] array2 = new double[sizeOfArrays];
         array2[0] = inValueForSecondArray;
-        for (int i = 1; i < array1.length; i++) {
+        for (int i = 1; i < array2.length; i++) {
             switch (operatorForSecondArray) {
                 case "+":
                     array2[i] = array2[i - 1] + stepForSecondArray;
