@@ -20,8 +20,8 @@ public class Main {
         String[] parametersForFirstArray = arrayParametersForFirstArray.split(" ");
         String[] parametersForSecondArray = arrayParametersForSecondArray.split(" ");
 
-        validateOfNumberOfArray(parametersForFirstArray);
-        validateOfNumberOfArray(parametersForSecondArray);
+        validateArrayLength(parametersForFirstArray);
+        validateArrayLength(parametersForSecondArray);
 
         final var initialValueOfFirstArray = Double.parseDouble(parametersForFirstArray[0]);
         final var initialValueOfSecondArray = Double.parseDouble(parametersForSecondArray[0]);
@@ -43,7 +43,7 @@ public class Main {
 
         if (sizeOfFirstArray == sizeOfSecondArray) {
 
-            System.out.println("The result of " + generalOperator + " entered arrays is " + Arrays.toString(CalculateArrays(firstArray, secondArray, generalOperator)));
+            System.out.println("The result of " + generalOperator + " entered arrays is " + Arrays.toString(calculateArrays(firstArray, secondArray, generalOperator)));
 
         } else
             System.out.println("Please enter the same size of arrays");
@@ -58,7 +58,7 @@ public class Main {
         return array;
     }
 
-    public static double[] CalculateArrays(double[] arrayFirst, double[] arraySecond, String operator) {
+    public static double[] calculateArrays(double[] arrayFirst, double[] arraySecond, String operator) {
         double[] calculatedArray = new double[arrayFirst.length];
         for (int i = 0; i < calculatedArray.length; i++) {
             calculatedArray[i] = calculateNumber(arrayFirst[i], arraySecond[i], operator);
@@ -66,10 +66,9 @@ public class Main {
         return calculatedArray;
     }
 
-    public static void validateOfNumberOfArray(String[] arrays) {
-        int lenght = arrays.length;
-        if (lenght != 4) {
-            System.err.println("Please enter all values");
+    public static void validateArrayLength(String[] arrays) {
+        if (arrays.length != 4) {
+            System.err.println("Please enter 4 input values");
             System.exit(0);
         }
     }
