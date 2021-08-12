@@ -16,19 +16,23 @@ public class Main {
         System.out.println("Pls enter operator to calculate the third array (+),(*),(-),(^) or (/)");
         var generalOperator = in.nextLine();
 
-        String[] parametersForFirstArray;
-        parametersForFirstArray = arrayParametersForFirstArray.split(" ");
-        validateOfNumberOfArray(arrayParametersForFirstArray);
-        double initialValueOfFirstArray = Double.parseDouble(parametersForFirstArray[0]);
-        int sizeOfFirstArray = Integer.parseInt(parametersForFirstArray[1]);
-        double stepOfFirstArray = Double.parseDouble(parametersForFirstArray[2]);
+
+        String[] parametersForFirstArray = arrayParametersForFirstArray.split(" ");
+        String[] parametersForSecondArray = arrayParametersForSecondArray.split(" ");
+
+        validateOfNumberOfArray(parametersForFirstArray);
+        validateOfNumberOfArray(parametersForSecondArray);
+
+        final var initialValueOfFirstArray = Double.parseDouble(parametersForFirstArray[0]);
+        final var initialValueOfSecondArray = Double.parseDouble(parametersForSecondArray[0]);
+
+        final var sizeOfFirstArray = Integer.parseInt(parametersForFirstArray[1]);
+        final var sizeOfSecondArray = Integer.parseInt(parametersForSecondArray[1]);
+
+        final var stepOfFirstArray = Double.parseDouble(parametersForFirstArray[2]);
+        final var stepOfSecondArray = Double.parseDouble(parametersForSecondArray[2]);
+
         String operatorOfFirstArray = parametersForFirstArray[3];
-        String[] parametersForSecondArray;
-        parametersForSecondArray = arrayParametersForSecondArray.split(" ");
-        validateOfNumberOfArray(arrayParametersForSecondArray);
-        double initialValueOfSecondArray = Double.parseDouble(parametersForSecondArray[0]);
-        int sizeOfSecondArray = Integer.parseInt(parametersForSecondArray[1]);
-        double stepOfSecondArray = Double.parseDouble(parametersForSecondArray[2]);
         String operatorOfSecondArray = parametersForSecondArray[3];
 
         double[] firstArray = createArray(initialValueOfFirstArray, sizeOfFirstArray, stepOfFirstArray, operatorOfFirstArray);
@@ -49,17 +53,7 @@ public class Main {
         double[] array = new double[sizeOfArray];
         array[0] = initialValue;
         for (int i = 1; i < array.length; i++) {
-            switch (incrementOperator) {
-                case "+" -> array[i] = array[i - 1] + stepOfArray;
-                case "-" -> array[i] = array[i - 1] - stepOfArray;
-                case "*" -> array[i] = array[i - 1] * stepOfArray;
-                case "/" -> array[i] = array[i - 1] / stepOfArray;
-                case "^" -> array[i] = Math.pow(array[i - 1], stepOfArray);
-                default -> {
-                    System.err.println("Error: Wrong operator for array");
-                    System.exit(0);
-                }
-            }
+            array[i] = calculateNumber(initialValue, stepOfArray, incrementOperator);
         }
         return array;
     }
@@ -67,26 +61,38 @@ public class Main {
     public static double[] CalculateArrays(double[] arrayFirst, double[] arraySecond, String operator) {
         double[] calculatedArray = new double[arrayFirst.length];
         for (int i = 0; i < calculatedArray.length; i++) {
-            switch (operator) {
-                case "+" -> calculatedArray[i] = arrayFirst[i] + arraySecond[i];
-                case "-" -> calculatedArray[i] = arrayFirst[i] - arraySecond[i];
-                case "*" -> calculatedArray[i] = arrayFirst[i] * arraySecond[i];
-                case "/" -> calculatedArray[i] = arrayFirst[i] / arraySecond[i];
-                case "^" -> calculatedArray[i] = Math.pow(arrayFirst[i], arraySecond[i]);
-                default -> {
-                    System.err.println("Error: Wrong general operator for second array");
-                    System.exit(0);
-                }
-            }
+            calculatedArray[i] = calculateNumber(arrayFirst[i], arraySecond[i], operator);
         }
         return calculatedArray;
     }
 
-    public static void validateOfNumberOfArray(String arrays) {
-        if (arrays.length() != 4) {
+    public static void validateOfNumberOfArray(String[] arrays) {
+        int lenght = arrays.length;
+        if (lenght != 4) {
             System.err.println("Please enter all values");
             System.exit(0);
         }
+    }
+
+    public static double calculateNumber(double firstValue, double secondValue, String operator) {
+        switch (operator) {
+            case "+":
+                return firstValue + secondValue;
+            case "-":
+                return firstValue - secondValue;
+            case "*":
+                return firstValue * secondValue;
+            case "/":
+                return firstValue / secondValue;
+            case "^":
+                return Math.pow(firstValue, secondValue);
+            default: {
+                System.err.println("Error: Wrong general operator for second array");
+                return 0;
+
+            }
+        }
+
     }
 }
 
