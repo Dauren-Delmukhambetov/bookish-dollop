@@ -11,7 +11,7 @@ public class Main {
         System.out.println("initial value, size of array, step of array, increment operator((+),(*),(-),(^) or (/))");
         var arrayParametersForFirstArray = in.nextLine();
         System.out.println("Pls enter through space parameters for second Array: ");
-        System.out.println("initial value, size of array, step of array, increment operator((+),(*),(-),(^) or (/))");
+        System.out.println("initial value, step of array, increment operator((+),(*),(-),(^) or (/))");
         var arrayParametersForSecondArray = in.nextLine();
         System.out.println("Pls enter operator to calculate the third array (+),(*),(-),(^) or (/)");
         var generalOperator = in.nextLine();
@@ -20,40 +20,35 @@ public class Main {
         String[] parametersForFirstArray = arrayParametersForFirstArray.split(" ");
         String[] parametersForSecondArray = arrayParametersForSecondArray.split(" ");
 
-        validateArrayLength(parametersForFirstArray);
-        validateArrayLength(parametersForSecondArray);
+        validateFirstArrayLength(parametersForFirstArray);
+        validateSecondArrayLength(parametersForSecondArray);
 
         final var initialValueOfFirstArray = Double.parseDouble(parametersForFirstArray[0]);
         final var initialValueOfSecondArray = Double.parseDouble(parametersForSecondArray[0]);
 
         final var sizeOfFirstArray = Integer.parseInt(parametersForFirstArray[1]);
-        final var sizeOfSecondArray = Integer.parseInt(parametersForSecondArray[1]);
 
         final var stepOfFirstArray = Double.parseDouble(parametersForFirstArray[2]);
-        final var stepOfSecondArray = Double.parseDouble(parametersForSecondArray[2]);
+        final var stepOfSecondArray = Double.parseDouble(parametersForSecondArray[1]);
 
         String operatorOfFirstArray = parametersForFirstArray[3];
-        String operatorOfSecondArray = parametersForSecondArray[3];
+        String operatorOfSecondArray = parametersForSecondArray[2];
 
         double[] firstArray = createArray(initialValueOfFirstArray, sizeOfFirstArray, stepOfFirstArray, operatorOfFirstArray);
-        double[] secondArray = createArray(initialValueOfSecondArray, sizeOfSecondArray, stepOfSecondArray, operatorOfSecondArray);
+        double[] secondArray = createArray(initialValueOfSecondArray, sizeOfFirstArray, stepOfSecondArray, operatorOfSecondArray);
 
         System.out.println("First Array" + Arrays.toString(firstArray));
         System.out.println("Second array" + Arrays.toString(secondArray));
 
-        if (sizeOfFirstArray == sizeOfSecondArray) {
+        System.out.println("The result of " + generalOperator + " entered arrays is " + Arrays.toString(calculateArrays(firstArray, secondArray, generalOperator)));
 
-            System.out.println("The result of " + generalOperator + " entered arrays is " + Arrays.toString(calculateArrays(firstArray, secondArray, generalOperator)));
-
-        } else
-            System.out.println("Please enter the same size of arrays");
     }
 
     public static double[] createArray(double initialValue, int sizeOfArray, double stepOfArray, String incrementOperator) {
         double[] array = new double[sizeOfArray];
         array[0] = initialValue;
         for (int i = 1; i < array.length; i++) {
-            array[i] = calculateNumber(initialValue, stepOfArray, incrementOperator);
+            array[i] = calculateNumber(array[i-1], stepOfArray, incrementOperator);
         }
         return array;
     }
@@ -66,9 +61,16 @@ public class Main {
         return calculatedArray;
     }
 
-    public static void validateArrayLength(String[] arrays) {
+    public static void validateFirstArrayLength(String[] arrays) {
         if (arrays.length != 4) {
-            System.err.println("Please enter 4 input values");
+            System.err.println("Please enter 4 input values for first array");
+            System.exit(0);
+        }
+    }
+
+    public static void validateSecondArrayLength(String[] arrays) {
+        if (arrays.length != 3) {
+            System.err.println("Please enter 3 input values for second array");
             System.exit(0);
         }
     }
