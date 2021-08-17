@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 
-public class RandomNumberCalculation extends Main {
+public class RandomNumberCalculation {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -16,7 +16,7 @@ public class RandomNumberCalculation extends Main {
 
         System.out.println("First array : " + Arrays.toString(firstRandomArray));
         System.out.println("Second array : " + Arrays.toString(secondRandomArray));
-        System.out.println("Calculated array : " + Arrays.toString(calculateArrays(firstRandomArray, secondRandomArray, "+")));
+        System.out.println("Calculated array : " + Arrays.toString(Main.calculateArrays(firstRandomArray, secondRandomArray, "+")));
     }
 
     public static double[] createRandomArray(int sizeOfArray) {
