@@ -2,33 +2,35 @@ package com.company;
 
 public class BasicEntry {
 
-    private String firstName;
-    private String lastName;
-    private MailAddress address;
-    private PhoneNumber phoneNumber;
+    private final String email;
+    private final MailAddress address;
+    private final String mobilePhone;
+    private final String landLinePhone;
 
-    public BasicEntry(String firstName, String lastName, MailAddress address, PhoneNumber phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+
+    public BasicEntry(MailAddress address, String email, String mobilePhone, String landLinePhone) {
         this.address = address;
-        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.mobilePhone = mobilePhone;
+        this.landLinePhone = landLinePhone;
+
     }
 
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
 
     public MailAddress getAddress() {
         return address;
     }
 
-    public PhoneNumber getPhoneNumber() {
-        return phoneNumber;
+    public String getEmail() {
+        return email;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public String getLandLinePhone() {
+        return landLinePhone;
     }
 
 }

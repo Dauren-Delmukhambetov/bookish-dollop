@@ -7,11 +7,11 @@ public class Address {
     private String street;
     private String numberOfHouse;
 
-    public Address(String cit, String dist, String str, String noh) {
-        city = cit;
-        district = dist;
-        street = str;
-        numberOfHouse = noh;
+    public Address(String city, String district, String street, String numberOfHouse) {
+        this.city = city;
+        this.district = district;
+        this.street = street;
+        this.numberOfHouse = numberOfHouse;
     }
 
     public String getCity() {
