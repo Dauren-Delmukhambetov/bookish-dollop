@@ -7,7 +7,6 @@ public class BasicEntry {
     private final String mobilePhone;
     private final String landLinePhone;
 
-
     public BasicEntry(MailAddress address, String email, String mobilePhone, String landLinePhone) {
         this.address = address;
         this.email = email;
@@ -15,7 +14,6 @@ public class BasicEntry {
         this.landLinePhone = landLinePhone;
 
     }
-
 
     public MailAddress getAddress() {
         return address;

@@ -1,6 +1,6 @@
 package com.company;
 
-public class Company extends BasicEntry{
+public class Company extends BasicEntry {
 
     private final String companyName;
 
@@ -9,11 +9,11 @@ public class Company extends BasicEntry{
         this.companyName = companyName;
     }
 
-    public String toString(){
-        return (companyName +  getAddress() +  getEmail() +  getMobilePhone() +  getLandLinePhone());
+    public String toString() {
+        return String.format("%s %s %s %s %s", companyName, getAddress(), getEmail(), getMobilePhone(), getLandLinePhone());
     }
 
-    public String getCompanyName(){
+    public String getCompanyName() {
         return companyName;
     }
 }

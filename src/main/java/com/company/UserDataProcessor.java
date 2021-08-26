@@ -6,13 +6,11 @@ public class UserDataProcessor {
 
     private final Scanner in = new Scanner(System.in);
 
-
     public BasicEntry createEntry() {
 
         boolean isCorrect;
 
         BasicEntry entry = null;
-
 
         do {
             System.out.println("Pls enter type of entry (person or company)");
@@ -59,12 +57,17 @@ public class UserDataProcessor {
         } while (!isCorrect);
 
         return entry;
-
     }
 
-    //public BasicEntry editEntry() {
-    //}
+    public String getSearchParam() {
+        System.out.println("Pls enter search value");
+        return in.nextLine();
+    }
 
+    public String getGlobalAction() {
+        System.out.println("Pls enter action: (add, search, exit, list)");
+        return in.nextLine();
+    }
 }
 
 

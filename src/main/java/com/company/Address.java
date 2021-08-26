@@ -14,6 +14,10 @@ public class Address {
         this.numberOfHouse = numberOfHouse;
     }
 
+    public String toString() {
+        return String.format("%s %s %s %s", city, district, street, numberOfHouse);
+    }
+
     public String getCity() {
         return city;
     }
