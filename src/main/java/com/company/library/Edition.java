@@ -2,32 +2,35 @@ package com.company.library;
 
 public abstract class Edition {
 
-    protected String author;
+    protected int pageNumber;
+    protected Author author;
     protected String printingHouse;
     protected int publishingYear;
 
-    protected Edition(String author, String printingHouse, int publishingYear){
+
+    protected Edition(int pageNumber, Author author, String printingHouse, int publishingYear) {
+        this.pageNumber = pageNumber;
         this.author = author;
         this.printingHouse = printingHouse;
         this.publishingYear = publishingYear;
     }
 
-    protected Edition(){
-            }
-
-    public String getAuthor(){
-        return author;
+    protected Edition() {
     }
 
-    public String getPolygraphy(){
+    public String getPrintingHouse() {
         return printingHouse;
     }
 
-    public void setAuthor(String author){this.author = author;}
+    public void setPrintingHouse(String polygraphy) {
+        this.printingHouse = polygraphy;
+    }
 
-    public void setPolygraphy(String polygraphy){this.printingHouse = polygraphy;}
+    public int getPublishingYear() {
+        return publishingYear;
+    }
 
-    public int getPublishingYear(){return publishingYear;}
-
-    public void setPublishingYear(int publishingYear){this.publishingYear = publishingYear;}
+    public void setPublishingYear(int publishingYear) {
+        this.publishingYear = publishingYear;
+    }
 }

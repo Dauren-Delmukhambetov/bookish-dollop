@@ -1,6 +1,6 @@
 package com.company.oop;
 
-public class MotorCar extends Car {
+public class MotorCar extends Car implements Beeper{
     private int passengersNumber;
     private String bodyType;
 
@@ -30,7 +30,12 @@ public class MotorCar extends Car {
     }
 
     @Override
-    public String makeSound() {
-        return "bipbip";
+    public String beep() {
+        return "beep";
     }
+
+//    @Override
+//    public String makeSound() {
+//        return "bipbip";
+//    }
 }

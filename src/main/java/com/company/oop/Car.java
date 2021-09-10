@@ -41,7 +41,7 @@ public abstract class Car extends Vehicle {
         this.engineType = engineType;
     }
 
-    public abstract String makeSound();
+    //public abstract String makeSound();
 
 
 }

@@ -1,29 +1,21 @@
 package com.company.library;
 
-public class CombinedEdition extends MaterialConstruction {
+public class CombinedEdition extends Edition {
 
-    protected boolean isContainsAudio;
+    private final boolean isContainsAudio;
 
-    protected boolean isContainsVideo;
+    private final boolean isContainsVideo;
 
-    protected boolean isContainsImage;
+    private final boolean isContainsImage;
 
-    protected CombinedEdition(int pageNumber, String author, String polygraphy, boolean isContainsAudio, boolean isContainsImage, boolean isContainsVideo) {
-        super(pageNumber, author, polygraphy);
+    protected CombinedEdition(int pageNumber, Author author, String printingHouse, int publishingYear, boolean isContainsAudio, boolean isContainsImage, boolean isContainsVideo) {
+        super(pageNumber, author, printingHouse, publishingYear);
         this.isContainsAudio = isContainsAudio;
         this.isContainsVideo = isContainsVideo;
         this.isContainsImage = isContainsImage;
     }
 
-    public boolean isContainsAudio() {
-        return isContainsAudio;
-    }
-
-    public boolean isContainsVideo() {
-        return isContainsVideo;
-    }
-
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
@@ -37,5 +29,30 @@ public class CombinedEdition extends MaterialConstruction {
 
     public void setPublishingYear(int publishingYear) {
         this.publishingYear = publishingYear;
+    }
+
+    public boolean isContainsAudio() {
+        return isContainsAudio;
+    }
+
+    public boolean isContainsVideo() {
+        return isContainsVideo;
+    }
+
+    public boolean isContainsImage() {
+        return isContainsImage;
+    }
+
+    @Override
+    public String toString() {
+        return "CombinedEdition{" +
+                "isContainsAudio=" + isContainsAudio +
+                ", isContainsVideo=" + isContainsVideo +
+                ", isContainsImage=" + isContainsImage +
+                ", author=" + author +
+                ", printingHouse='" + printingHouse + '\'' +
+                ", publishingYear=" + publishingYear +
+                ", pageNumber=" + pageNumber +
+                '}';
     }
 }

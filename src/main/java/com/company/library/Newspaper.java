@@ -5,8 +5,8 @@ public class Newspaper extends LeafyEdition {
     protected boolean isFastening;
 
 
-    protected Newspaper(int pagesNumber, String author, String printingHouse, int startPublishingYear, boolean isPeriodical, FrequencyOfPublication frequencyOfPublication, boolean isFastening) {
-        super(pagesNumber, author, printingHouse, startPublishingYear, isPeriodical, frequencyOfPublication);
+    protected Newspaper(int pagesNumber, Author author, String printingHouse, int publishingYear, int startPublishingYear, boolean isPeriodical, FrequencyOfPublication frequencyOfPublication, boolean isFastening) {
+        super(pagesNumber, author, printingHouse, publishingYear, startPublishingYear, isPeriodical, frequencyOfPublication);
         this.isFastening = isFastening;
     }
 
@@ -18,4 +18,17 @@ public class Newspaper extends LeafyEdition {
         this.isFastening = isFastening;
     }
 
+    @Override
+    public String toString() {
+        return "Newspaper{" +
+                "pageNumber=" + pageNumber +
+                ", author=" + author +
+                ", printingHouse='" + printingHouse + '\'' +
+                ", publishingYear=" + publishingYear +
+                ", startPublishingYear=" + startPublishingYear +
+                ", isPeriodical=" + isPeriodical +
+                ", frequencyOfPublication=" + frequencyOfPublication +
+                ", isFastening=" + isFastening +
+                '}';
+    }
 }

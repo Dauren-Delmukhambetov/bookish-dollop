@@ -4,17 +4,24 @@ public class LibraryMain {
 
     public static void main(String[] args) {
 
-        Book book = new Book(200, "Rowling", "London", "Fantasy", "fil stone");
+        Author authorBook = new Author("Max", "Block", 1900);
+        System.out.println(authorBook);
+        Book book = new Book(320, authorBook, "Moscow", 2001, "documental", "war");
 
-        CombinedEdition historyOfEgypt = new CombinedEdition(500, "Tven", "Cairo", true, false, true);
+        Author authorHistoryEgypt = new Author("Ron", "Brown", 1990);
+        CombinedEdition historyOfEgypt = new CombinedEdition(500, authorHistoryEgypt, "Cairo", 1945, false, true, true);
 
-        Posters filmPoster = new Posters(1, "test", "new york", 2020, true, FrequencyOfPublication.ANNUALLY, "new york");
+        Author authorFilmPoster = new Author("Roman", "Petrov", 1991);
+        Posters filmPoster = new Posters(1, authorFilmPoster, "new york", 2020, 1945, false, FrequencyOfPublication.ANNUALLY, "new york");
 
-        Magazine calambur = new Magazine(30, "magazineAuthor", "minsk", false);
+        Author authorCalambur = new Author("Alex", "Ovanno", 1900);
+        Magazine calambur = new Magazine(30, authorCalambur, "minsk", 2005, true);
 
-        Newspaper times = new Newspaper(10, "papertest", "new york", 1970, true, FrequencyOfPublication.DAILY, true);
+        Author authorTimes = new Author("John", "Lennon", 1956);
+        Newspaper times = new Newspaper(10, authorTimes, "new york", 2020, 1800, true, FrequencyOfPublication.DAILY, true);
 
-        Book warAndPeace = new Book(200, "tolstoy", "Moscow", "history", "War and Peace", 3);
+        Author authorWarAndPeace = new Author("Lev", "Tolstoy", 1828);
+        Book warAndPeace = new Book(200, authorWarAndPeace, "Moscow", 2000, "history", "war and peace");
 
 
     }

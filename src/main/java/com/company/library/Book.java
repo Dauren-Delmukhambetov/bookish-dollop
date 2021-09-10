@@ -1,6 +1,6 @@
 package com.company.library;
 
-public class Book extends MaterialConstruction {
+public class Book extends Edition {
 
     protected final String genre;
 
@@ -8,17 +8,30 @@ public class Book extends MaterialConstruction {
 
     protected int volume;
 
-    protected Book(int pageNumber, String author, String printingHouse, String genre, String bookName) {
+    protected Book(int pageNumber, Author author, String printingHouse, int publishingYear, String genre, String bookName) {
 
-        this(pageNumber, author, printingHouse, genre, bookName, 0);
+        this(pageNumber, author, printingHouse, publishingYear, genre, bookName, 0);
     }
 
-    protected Book(int pageNumber, String author, String printingHouse, String genre, String bookName, int volume) {
-        super(pageNumber, author, printingHouse);
+    @Override
+    public String toString() {
+        return "Book{" +
+                "genre='" + genre + '\'' +
+                ", bookName='" + bookName + '\'' +
+                ", volume=" + volume +
+                ", author=" + author +
+                ", printingHouse='" + printingHouse + '\'' +
+                ", publishingYear=" + publishingYear +
+                '}';
+    }
+
+    protected Book(int pageNumber, Author author, String printingHouse, int publishingYear, String genre, String bookName, int volume) {
+        super(pageNumber, author, printingHouse, publishingYear);
         this.genre = genre;
         this.bookName = bookName;
         this.volume = volume;
     }
+
 
     public String getGenre() {
         return genre;
@@ -31,5 +44,10 @@ public class Book extends MaterialConstruction {
     public void setVolume(int volume) {
         this.volume = volume;
     }
+
+    public String getBookName() {
+        return bookName;
+    }
+
 
 }
