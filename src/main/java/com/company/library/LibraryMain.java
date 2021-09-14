@@ -5,8 +5,10 @@ public class LibraryMain {
     public static void main(String[] args) {
 
         Author authorBook = new Author("Max", "Block", 1900);
-        System.out.println(authorBook);
         Book book = new Book(320, authorBook, "Moscow", 2001, "documental", "war");
+
+        Author authorBookTest = new Author("Max", "Block", 1900);
+        Book bookTest = new Book(430, authorBookTest, "Moscow", 2001, "documental", "war");
 
         Author authorHistoryEgypt = new Author("Ron", "Brown", 1990);
         CombinedEdition historyOfEgypt = new CombinedEdition(500, authorHistoryEgypt, "Cairo", 1945, false, true, true);
@@ -22,6 +24,8 @@ public class LibraryMain {
 
         Author authorWarAndPeace = new Author("Lev", "Tolstoy", 1828);
         Book warAndPeace = new Book(200, authorWarAndPeace, "Moscow", 2000, "history", "war and peace");
+
+        System.out.println(book.compareTo(bookTest));
 
 
     }

@@ -1,9 +1,10 @@
 package com.company.oop;
 
-public class MotorCar extends Car implements Beeper{
+import java.io.Serializable;
+
+public class MotorCar extends Car implements Beeper, Comparable<MotorCar>, Serializable, Cloneable {
     private int passengersNumber;
     private String bodyType;
-
 
 
     public MotorCar(int passengersNumber, String bodyType, int numberOfWheel, String color, String engineType) {
@@ -32,6 +33,14 @@ public class MotorCar extends Car implements Beeper{
     @Override
     public String beep() {
         return "beep";
+    }
+
+    @Override
+    public int compareTo(MotorCar o) {
+        if (passengersNumber == o.passengersNumber) {
+            return 0;
+        }
+        return passengersNumber > o.passengersNumber ? 1 : -1;
     }
 
 //    @Override

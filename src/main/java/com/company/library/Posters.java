@@ -1,6 +1,6 @@
 package com.company.library;
 
-public class Posters extends LeafyEdition {
+public class Posters extends LeafyEdition implements Comparable<Posters>{
 
     protected String placeOfExhibiting;
 
@@ -25,6 +25,14 @@ public class Posters extends LeafyEdition {
                 ", frequencyOfPublication=" + frequencyOfPublication +
                 ", placeOfExhibiting='" + placeOfExhibiting + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Posters o) {
+        if (pageNumber == o.pageNumber) {
+            return 0;
+        }
+        return pageNumber > o.pageNumber ? 1 : -1;
     }
 }
 

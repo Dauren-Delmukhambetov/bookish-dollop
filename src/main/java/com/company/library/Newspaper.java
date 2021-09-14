@@ -1,6 +1,6 @@
 package com.company.library;
 
-public class Newspaper extends LeafyEdition {
+public class Newspaper extends LeafyEdition implements Comparable<Newspaper>{
 
     protected boolean isFastening;
 
@@ -30,5 +30,13 @@ public class Newspaper extends LeafyEdition {
                 ", frequencyOfPublication=" + frequencyOfPublication +
                 ", isFastening=" + isFastening +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Newspaper o) {
+        if (pageNumber == o.pageNumber) {
+            return 0;
+        }
+        return pageNumber > o.pageNumber ? 1 : -1;
     }
 }

@@ -1,6 +1,6 @@
 package com.company.library;
 
-public class Book extends Edition {
+public class Book extends Edition implements Comparable<Book> {
 
     protected final String genre;
 
@@ -49,5 +49,13 @@ public class Book extends Edition {
         return bookName;
     }
 
+
+    @Override
+    public int compareTo(Book o) {
+        if (pageNumber == o.pageNumber) {
+            return 0;
+        }
+        return pageNumber > o.pageNumber ? 1 : -1;
+    }
 
 }

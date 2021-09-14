@@ -1,6 +1,6 @@
 package com.company.library;
 
-public class CombinedEdition extends Edition {
+public class CombinedEdition extends Edition implements Comparable<CombinedEdition> {
 
     private final boolean isContainsAudio;
 
@@ -55,4 +55,13 @@ public class CombinedEdition extends Edition {
                 ", pageNumber=" + pageNumber +
                 '}';
     }
+
+    @Override
+    public int compareTo(CombinedEdition o) {
+        if (pageNumber == o.pageNumber) {
+            return 0;
+        }
+        return pageNumber > o.pageNumber ? 1 : -1;
+    }
+
 }

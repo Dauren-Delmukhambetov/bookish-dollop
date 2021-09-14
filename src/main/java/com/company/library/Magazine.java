@@ -1,6 +1,6 @@
 package com.company.library;
 
-public class Magazine extends Edition {
+public class Magazine extends Edition implements Comparable<Magazine> {
 
     protected boolean isGlossy;
 
@@ -26,5 +26,13 @@ public class Magazine extends Edition {
                 ", isGlossy=" + isGlossy +
                 ", pageNumber=" + pageNumber +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Magazine o) {
+        if (pageNumber == o.pageNumber) {
+            return 0;
+        }
+        return pageNumber > o.pageNumber ? 1 : -1;
     }
 }
