@@ -1,5 +1,7 @@
 package com.company.library;
 
+import java.util.ArrayList;
+
 public class Book extends Edition implements Comparable<Book> {
 
     protected final String genre;
@@ -19,11 +21,13 @@ public class Book extends Edition implements Comparable<Book> {
                 "genre='" + genre + '\'' +
                 ", bookName='" + bookName + '\'' +
                 ", volume=" + volume +
+                ", pageNumber=" + pageNumber +
                 ", author=" + author +
                 ", printingHouse='" + printingHouse + '\'' +
                 ", publishingYear=" + publishingYear +
                 '}';
     }
+
 
     protected Book(int pageNumber, Author author, String printingHouse, int publishingYear, String genre, String bookName, int volume) {
         super(pageNumber, author, printingHouse, publishingYear);
@@ -57,5 +61,6 @@ public class Book extends Edition implements Comparable<Book> {
         }
         return pageNumber > o.pageNumber ? 1 : -1;
     }
+
 
 }

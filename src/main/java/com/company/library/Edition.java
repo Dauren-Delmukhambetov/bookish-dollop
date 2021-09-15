@@ -1,5 +1,7 @@
 package com.company.library;
 
+import java.util.ArrayList;
+
 public abstract class Edition {
 
     protected int pageNumber;
@@ -33,4 +35,5 @@ public abstract class Edition {
     public void setPublishingYear(int publishingYear) {
         this.publishingYear = publishingYear;
     }
+
 }
