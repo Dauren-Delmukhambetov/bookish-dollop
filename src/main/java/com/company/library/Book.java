@@ -11,7 +11,6 @@ public class Book extends Edition implements Comparable<Book> {
     protected int volume;
 
     protected Book(int pageNumber, Author author, String printingHouse, int publishingYear, String genre, String bookName) {
-
         this(pageNumber, author, printingHouse, publishingYear, genre, bookName, 0);
     }
 
@@ -28,14 +27,12 @@ public class Book extends Edition implements Comparable<Book> {
                 '}';
     }
 
-
     protected Book(int pageNumber, Author author, String printingHouse, int publishingYear, String genre, String bookName, int volume) {
         super(pageNumber, author, printingHouse, publishingYear);
         this.genre = genre;
         this.bookName = bookName;
         this.volume = volume;
     }
-
 
     public String getGenre() {
         return genre;
