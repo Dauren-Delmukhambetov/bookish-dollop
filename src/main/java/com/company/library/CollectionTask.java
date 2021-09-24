@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
@@ -39,41 +40,61 @@ public class CollectionTask {
                     author.getLastName(),
                     authorBooks.size(),
                     authorBooks);
+
         }
 
     }
 
     private static Map<Author, List<Book>> groupBooksByAuthors(List<Book> books) {
-        //TODO group books by authors
-        return emptyMap();
+        Map<Author, List<Book>> listMap = new HashMap<>();
+        for (Book book : books) {
+            if (!listMap.containsKey(book.author)) {
+                listMap.put(book.author, new ArrayList<>());
+            }
+            listMap.get(book.author).add(book);
+
+        }
+
+        return listMap;
     }
 
     //TODO change return type to appropriate one
     private static Collection<Author> findUniqueAuthors(List<Book> books) {
         //TODO return only unique authors
-        return emptyList();
+        Set<Author> uniqueAuthors = new HashSet<>();
+        for (Book book : books) {
+            uniqueAuthors.add(book.author);
+        }
+
+        return uniqueAuthors;
+
     }
 
     //TODO change return type to appropriate one
     private static Collection<Book> findUniqueBooks(List<Book> books) {
         //TODO return only unique books
-        return emptyList();
+        return new HashSet<>(books);
     }
 
     public static List<String> getLinesFromFile(final String filepath) throws IOException, URISyntaxException {
         return Files.lines(
-                        Path.of(
-                                CollectionTask.class
-                                        .getClassLoader()
-                                        .getResource(filepath)
-                                        .toURI()
-                        )
+                Path.of(
+                        CollectionTask.class
+                                .getClassLoader()
+                                .getResource(filepath)
+                                .toURI()
                 )
+        )
                 .toList();
     }
 
     public static List<Book> instantiateBooks(List<String> lines) {
         //TODO parse string, instantiate Author and Book classes and return list of books
-        return emptyList();
+        List<Book> bookList = new ArrayList<>();
+        for (String e : lines) {
+            String[] columns = e.split(",");
+            bookList.add(new Book(new Author(columns[0], columns[1]), columns[2], Integer.parseInt(columns[3])));
+        }
+        return bookList;
     }
 }

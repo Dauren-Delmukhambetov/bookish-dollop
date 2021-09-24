@@ -1,6 +1,7 @@
 package com.company.library;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class Edition {
 
@@ -15,6 +16,11 @@ public abstract class Edition {
         this.author = author;
         this.printingHouse = printingHouse;
         this.publishingYear = publishingYear;
+    }
+
+    protected Edition(Author author, int publishingYear) {
+        this.publishingYear = publishingYear;
+        this.author = author;
     }
 
     protected Edition() {
@@ -36,4 +42,16 @@ public abstract class Edition {
         this.publishingYear = publishingYear;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Edition edition = (Edition) o;
+        return pageNumber == edition.pageNumber && publishingYear == edition.publishingYear && Objects.equals(author, edition.author) && Objects.equals(printingHouse, edition.printingHouse);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pageNumber, author, printingHouse, publishingYear);
+    }
 }

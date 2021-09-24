@@ -1,5 +1,7 @@
 package com.company.library;
 
+import java.util.Objects;
+
 public class Author {
 
     protected String firstName;
@@ -12,13 +14,30 @@ public class Author {
         this.birthYear = birthYear;
     }
 
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @Override
     public String toString() {
         return "Author{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", birthYear=" + birthYear +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author author = (Author) o;
+        return birthYear == author.birthYear && Objects.equals(firstName, author.firstName) && Objects.equals(lastName, author.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, birthYear);
     }
 
     public int getBirthYear() {
