@@ -35,7 +35,7 @@ public class CollectionTask {
         for (final var e : booksByAuthor.entrySet()) {
             final var author = e.getKey();
             final var authorBooks = e.getValue();
-            System.out.printf("Author %s %s has %d books in library: %s",
+            System.out.printf("Author %s %s has %d books in library: %s %n" ,
                     author.getFirstName(),
                     author.getLastName(),
                     authorBooks.size(),

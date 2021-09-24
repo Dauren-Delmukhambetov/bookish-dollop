@@ -31,11 +31,11 @@ public class Book extends Edition implements Comparable<Book> {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "\nBook{" +
                 ", bookName='" + bookName + '\'' +
                 ", author=" + author +
                 ", publishingYear=" + publishingYear +
-                '}';
+                "}";
     }
 
     protected Book(int pageNumber, Author author, String printingHouse, int publishingYear, String genre, String bookName, int volume) {
@@ -49,11 +49,6 @@ public class Book extends Edition implements Comparable<Book> {
         super(author, publishingYear);
         this.bookName = bookName;
     }
-
-
-
-
-
 
 
     public String getGenre() {
