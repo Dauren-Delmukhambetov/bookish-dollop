@@ -1,0 +1,32 @@
+Joanne,Rowling,Harry Potter and the Philosopher's Stone,1997
+Joanne,Rowling,Harry Potter and the Chamber of Secrets,1998
+Joanne,Rowling,Harry Potter and the Prisoner of Azkaban,1999
+Joanne,Rowling,Harry Potter and the Goblet of Fire,2000
+Joanne,Rowling,Harry Potter and the Order of the Phoenix,2003
+Joanne,Rowling,Harry Potter and the Half-Blood Prince,2005
+Joanne,Rowling,Harry Potter and the Deathly Hallows,2007
+Jack,London,The Cruise of the Dazzler,1902
+Jack,London,A Daughter of the Snows,1902
+Jack,London,The Call of the Wild,1903
+Jack,London,The Kempton-Wace Letters,1903
+Jack,London,The Sea-Wolf,1904
+Jack,London,The Game,1905
+Jack,London,White Fang,1906
+Jack,London,Before Adam,1907
+Jack,London,The Iron Heel,1908
+Jack,London,Martin Eden,1909
+Jack,London,Burning Daylight,1910
+Jack,London,Adventure,1911
+Jack,London,The Scarlet Plague,1912
+Jack,London,A Son of the Sun,1912
+Jack,London,The Abysmal Brute,1913
+Jack,London,The Valley of the Moon,1913
+Jack,London,The Mutiny of the Elsinore,1914
+Jack,London,The Star Rover,1915
+Jack,London,The Little Lady of the Big House,1916
+Jack,London,Jerry of the Islands,1917
+Jack,London,Hearts of Three,1920
+Jack,London,The Assassination Bureau,1963
+Adam,Smith,The Theory of Moral Sentiments,1759
+Adam,Smith,The Wealth of Nations,1776
+Adam,Smith,The Wealth of Nations,1776

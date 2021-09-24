@@ -3,6 +3,8 @@ package com.company.library;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.List.of;
+
 public class LibraryMain {
 
     public static void main(String[] args) {
@@ -29,20 +31,20 @@ public class LibraryMain {
         Book warAndPeace = new Book(200, authorWarAndPeace, "Moscow", 2000, "history", "war and peace");
 
         System.out.println(book.compareTo(bookTest));
-
         List<Book> books = new ArrayList<>();
-        books.addAll(List.of(book, bookTest));
+
+        books.addAll(of(book, bookTest));
         System.out.println(books);
         System.out.println(books.size());
-        System.out.println(books.isEmpty());
-        System.out.println(books.contains(book));
-        System.out.println(books.containsAll(List.of(book,bookTest)));
+        System.out.println("isEmpty " + books.isEmpty());
+        System.out.println("contains book " + books.contains(book));
+        System.out.println("contains book and booktest " + books.containsAll(of(bookTest,book)));
         books.remove(book);
         System.out.println(books);
         System.out.println(books.add(book));
-        books.removeAll(List.of(book, bookTest));
+        books.removeAll(of(book, bookTest));
         System.out.println(books);
-        books.addAll(List.of(book, bookTest));
+        books.addAll(of(book, bookTest));
         System.out.println(books);
         books.clear();
         System.out.println(books);
@@ -50,8 +52,7 @@ public class LibraryMain {
 
 
 
-        List<Edition> editions = new ArrayList<>();
-        List<Comparable> items = new ArrayList<>();
+
 
 
 
