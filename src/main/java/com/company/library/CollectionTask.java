@@ -5,6 +5,9 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,9 +19,12 @@ public class CollectionTask {
     public static void main(String[] args) throws IOException, URISyntaxException {
         System.out.println("This task demos Java Collection Framework");
 
+
         // read data from file
+
         final var lines = getLinesFromFile("books.txt");
         System.out.printf("Lines number we got from file is %d %n", lines.size());
+
 
         // instantiate objects
         final var books = instantiateBooks(lines);
@@ -78,7 +84,7 @@ public class CollectionTask {
             uniqueAuthors.add(book.author);
         }*/
         return books.stream()
-                .map(book ->book.author)
+                .map(book -> book.author)
                 .collect(Collectors.toSet());
     }
 
@@ -92,32 +98,60 @@ public class CollectionTask {
     }
 
     public static List<String> getLinesFromFile(final String filepath) throws IOException, URISyntaxException {
-        return Files.lines(
-                Path.of(
-                        CollectionTask.class
-                                .getClassLoader()
-                                .getResource(filepath)
-                                .toURI()
-                )
-        )
-                .toList();
+
+        try {
+            return Files.lines(
+                    Path.of(
+                            CollectionTask.class
+                                    .getClassLoader()
+                                    .getResource(filepath)
+                                    .toURI()
+                    )
+            )
+                    .toList();
+        } catch (NullPointerException e) {
+            List<String> emptyFile = new ArrayList<>();
+            System.err.println("File doesn't found");
+            return emptyFile;
+        }
+
+
     }
+
 
     public static List<Book> instantiateBooks(List<String> lines) {
         //TODO parse string, instantiate Author and Book classes and return list of books
-        /*List<Book> bookList = new ArrayList<>();
-        for (String e : lines) {
-            String[] columns = e.split(",");
-            bookList.add(new Book(new Author(columns[0], columns[1]), columns[2], Integer.parseInt(columns[3])));
-        }
-        return bookList;*/
+        List<Book> bookList = new ArrayList<>();
+        try {
 
-        return lines.stream()
-                .map(s -> s.split(","))
-                .map(s -> new Book(new Author(s[0], s[1]), s[2], Integer.parseInt(s[3])))
-                .sorted((Comparator.comparingInt(Book ::getPublishingYear))
-                .reversed())
-                .collect(Collectors.toList());
+            for (String e : lines) {
+                String[] columns = e.split(",");
+                bookList.add(new Book(new Author(columns[0], columns[1]), columns[2], Integer.parseInt(columns[3])));
+            }
+            return bookList;
+        } catch (NumberFormatException y) {
+
+            //Pattern exampleString = Pattern.compile(("[a-zA-Z],[a-zA-Z],[a-zA-Z],\\d{4}"), Pattern.CASE_INSENSITIVE);
+
+            System.err.println("Wrong data format at document");
+
+        }
+        return bookList;
+
+        /*try {
+
+            return lines.stream()
+                    .map(s -> s.split(","))
+                    .map(s -> new Book(new Author(s[0], s[1]), s[2], Integer.parseInt(s[3])))
+                    .sorted((Comparator.comparingInt(Book::getPublishingYear))
+                            .reversed())
+                    .collect(Collectors.toList());
+        }catch (NumberFormatException e){
+            System.err.println("Wrong data format at document");
+
+
+        }*/
+
 
     }
 }
