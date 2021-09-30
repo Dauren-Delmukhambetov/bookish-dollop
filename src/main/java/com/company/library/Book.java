@@ -32,7 +32,7 @@ public class Book extends Edition implements Comparable<Book> {
     @Override
     public String toString() {
         return "\nBook{" +
-                ", bookName='" + bookName + '\'' +
+                " bookName='" + bookName + '\'' +
                 ", author=" + author +
                 ", publishingYear=" + publishingYear +
                 "}";

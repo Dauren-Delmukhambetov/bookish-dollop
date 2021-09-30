@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
@@ -32,48 +33,62 @@ public class CollectionTask {
         System.out.printf("Number of unique books in file is %d %n", uniqueBooks.size());
         System.out.printf("Number of unique authors in file is %d %n", uniqueAuthors.size());
 
-        for (final var e : booksByAuthor.entrySet()) {
+        /*for (final var e : booksByAuthor.entrySet()) {
             final var author = e.getKey();
             final var authorBooks = e.getValue();
-            System.out.printf("Author %s %s has %d books in library: %s %n" ,
+            System.out.printf("Author %s %s has %d books in library: %s %n",
                     author.getFirstName(),
                     author.getLastName(),
                     authorBooks.size(),
                     authorBooks);
 
-        }
+        }*/
+
+        booksByAuthor.entrySet().stream().forEach(entry -> {
+            final var author = entry.getKey();
+            final var authorBooks = entry.getValue();
+            System.out.printf("Author %s %s has %d books in library: %s %n",
+                    author.getFirstName(),
+                    author.getLastName(),
+                    authorBooks.size(),
+                    authorBooks);
+
+        });
 
     }
 
     private static Map<Author, List<Book>> groupBooksByAuthors(List<Book> books) {
-        Map<Author, List<Book>> listMap = new HashMap<>();
+        /*Map<Author, List<Book>> listMap = new HashMap<>();
         for (Book book : books) {
             if (!listMap.containsKey(book.author)) {
                 listMap.put(book.author, new ArrayList<>());
             }
             listMap.get(book.author).add(book);
 
-        }
-
-        return listMap;
+        }*/
+        return books.stream()
+                .collect(Collectors.groupingBy(book -> book.author));
     }
 
     //TODO change return type to appropriate one
     private static Collection<Author> findUniqueAuthors(List<Book> books) {
         //TODO return only unique authors
-        Set<Author> uniqueAuthors = new HashSet<>();
+        /*Set<Author> uniqueAuthors = new HashSet<>();
         for (Book book : books) {
             uniqueAuthors.add(book.author);
-        }
-
-        return uniqueAuthors;
-
+        }*/
+        return books.stream()
+                .map(book ->book.author)
+                .collect(Collectors.toSet());
     }
 
     //TODO change return type to appropriate one
     private static Collection<Book> findUniqueBooks(List<Book> books) {
         //TODO return only unique books
-        return new HashSet<>(books);
+        //return new HashSet<>(books);
+
+        return books.stream().distinct().collect(Collectors.toList());
+
     }
 
     public static List<String> getLinesFromFile(final String filepath) throws IOException, URISyntaxException {
@@ -90,11 +105,19 @@ public class CollectionTask {
 
     public static List<Book> instantiateBooks(List<String> lines) {
         //TODO parse string, instantiate Author and Book classes and return list of books
-        List<Book> bookList = new ArrayList<>();
+        /*List<Book> bookList = new ArrayList<>();
         for (String e : lines) {
             String[] columns = e.split(",");
             bookList.add(new Book(new Author(columns[0], columns[1]), columns[2], Integer.parseInt(columns[3])));
         }
-        return bookList;
+        return bookList;*/
+
+        return lines.stream()
+                .map(s -> s.split(","))
+                .map(s -> new Book(new Author(s[0], s[1]), s[2], Integer.parseInt(s[3])))
+                .sorted((Comparator.comparingInt(Book ::getPublishingYear))
+                .reversed())
+                .collect(Collectors.toList());
+
     }
 }
