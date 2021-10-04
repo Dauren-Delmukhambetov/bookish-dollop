@@ -15,6 +15,7 @@ Jack,London,White Fang,1906
 Jack,London,Before Adam,1907
 Jack,London,The Iron Heel,1908
 Jack,London,Martin Eden,1909
+Franklin,Herbert,1965,Dune
 Jack,London,Burning Daylight,1910
 Jack,London,Adventure,1911
 Jack,London,The Scarlet Plague,1912

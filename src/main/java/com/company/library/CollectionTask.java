@@ -22,7 +22,7 @@ public class CollectionTask {
 
         // read data from file
 
-        final var lines = getLinesFromFile("books.txt");
+        final var lines = getLinesFromFile("book.txt");
         System.out.printf("Lines number we got from file is %d %n", lines.size());
 
 
@@ -110,9 +110,8 @@ public class CollectionTask {
             )
                     .toList();
         } catch (NullPointerException e) {
-            List<String> emptyFile = new ArrayList<>();
-            System.err.println("File doesn't found");
-            return emptyFile;
+            System.err.println("File 'books.txt' doesn't found");
+            return emptyList();
         }
 
 
@@ -122,21 +121,23 @@ public class CollectionTask {
     public static List<Book> instantiateBooks(List<String> lines) {
         //TODO parse string, instantiate Author and Book classes and return list of books
         List<Book> bookList = new ArrayList<>();
-        try {
+
 
             for (String e : lines) {
                 String[] columns = e.split(",");
-                bookList.add(new Book(new Author(columns[0], columns[1]), columns[2], Integer.parseInt(columns[3])));
+                try {
+                    bookList.add(new Book(new Author(columns[0], columns[1]), columns[2], Integer.parseInt(columns[3])));
+                } catch (NumberFormatException ex) {
+                    System.err.println("Wrong data format at document: " + e);
+                }
             }
             return bookList;
-        } catch (NumberFormatException y) {
 
-            //Pattern exampleString = Pattern.compile(("[a-zA-Z],[a-zA-Z],[a-zA-Z],\\d{4}"), Pattern.CASE_INSENSITIVE);
 
-            System.err.println("Wrong data format at document");
+            //Pattern exampleString = Pattern.compile(("[a-zA-Z]+,[a-zA-Z]+,[a-zA-Z\\w-\\d]*,\\d{4}"), Pattern.CASE_INSENSITIVE);
 
-        }
-        return bookList;
+
+
 
         /*try {
 
@@ -153,5 +154,5 @@ public class CollectionTask {
         }*/
 
 
+        }
     }
-}
