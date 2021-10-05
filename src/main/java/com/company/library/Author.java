@@ -9,20 +9,12 @@ public class Author {
     protected int birthYear;
 
     public Author(String firstName, String lastName, int birthYear) {
-        if (firstName == null | lastName == null) {
-            throw new AuthorValidationException("Author is Null");
-
-        }
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthYear = birthYear;
     }
 
     public Author(String firstName, String lastName) {
-        if (firstName == null | lastName == null) {
-            throw new AuthorValidationException("Author is Null");
-
-        }
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -70,5 +62,17 @@ public class Author {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void validate() {
+        if (firstName == null || lastName == null) {
+            throw new AuthorValidationException("First name or Last name is Null");
+
+        }
+        if (!firstName.matches("[a-zA-Z]+") || !lastName.matches("[a-zA-Z]+")) {
+            throw new AuthorValidationException("Wrong First or Last names value at document: " + firstName + lastName);
+        }
+
+
     }
 }
