@@ -9,12 +9,20 @@ public class Author {
     protected int birthYear;
 
     public Author(String firstName, String lastName, int birthYear) {
+        if (firstName == null | lastName == null) {
+            throw new AuthorValidationException("Author is Null");
+
+        }
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthYear = birthYear;
     }
 
     public Author(String firstName, String lastName) {
+        if (firstName == null | lastName == null) {
+            throw new AuthorValidationException("Author is Null");
+
+        }
         this.firstName = firstName;
         this.lastName = lastName;
     }

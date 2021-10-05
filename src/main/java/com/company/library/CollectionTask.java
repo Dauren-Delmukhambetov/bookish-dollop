@@ -5,14 +5,9 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
-import static java.util.Collections.emptyMap;
 
 public class CollectionTask {
 
@@ -101,13 +96,13 @@ public class CollectionTask {
 
         try {
             return Files.lines(
-                    Path.of(
-                            CollectionTask.class
-                                    .getClassLoader()
-                                    .getResource(filepath)
-                                    .toURI()
+                            Path.of(
+                                    CollectionTask.class
+                                            .getClassLoader()
+                                            .getResource(filepath)
+                                            .toURI()
+                            )
                     )
-            )
                     .toList();
         } catch (NullPointerException e) {
             System.err.println("File 'books.txt' doesn't found");
@@ -121,29 +116,27 @@ public class CollectionTask {
     public static List<Book> instantiateBooks(List<String> lines) {
         //TODO parse string, instantiate Author and Book classes and return list of books
         List<Book> bookList = new ArrayList<>();
-        Pattern exampleFirstAndLastName = Pattern.compile(("[a-zA-Z]+,[a-zA-Z]"), Pattern.CASE_INSENSITIVE);
+        //Pattern exampleFirstAndLastName = Pattern.compile(("[a-zA-Z]+,[a-zA-Z]"), Pattern.CASE_INSENSITIVE);
 
 
-            for (String e : lines) {
-                String[] columns = e.split(",");
-                try {
-                    if(columns[0].matches("[a-zA-Z]") && columns[1].matches("[a-zA-Z]")){
-                        bookList.add(new Book(new Author(columns[0], columns[1]), columns[2], Integer.parseInt(columns[3])));
-                    }else{
-                        throw new AuthorNullValueException();
-                    }
+        for (String e : lines) {
+            String[] columns = e.split(",");
 
-                } catch (NumberFormatException ex) {
-                    System.err.println("Wrong data format at document: " + e);
-                } catch (AuthorNullValueException ey) {
-                    System.err.println("Wrong First or Last names value");
-                }
+            try {
+                validate(columns);
+                bookList.add(new Book(new Author (columns[0], columns[1]), columns[2], Integer.parseInt(columns[3])));
 
+            } catch (NumberFormatException ex) {
+                System.err.println("Wrong data format at document: " + e);
+            } catch (AuthorValidationException ey) {
+                System.err.println("Wrong First or Last names value at document: " + e);
             }
-            return bookList;
+
+        }
+        return bookList;
 
 
-            //Pattern exampleString = Pattern.compile(("[a-zA-Z]+,[a-zA-Z]+,[a-zA-Z\\w-\\d]*,\\d{4}"), Pattern.CASE_INSENSITIVE);
+        //Pattern exampleString = Pattern.compile(("[a-zA-Z]+,[a-zA-Z]+,[a-zA-Z\\w-\\d]*,\\d{4}"), Pattern.CASE_INSENSITIVE);
 
 
 
@@ -163,5 +156,17 @@ public class CollectionTask {
         }*/
 
 
-        }
     }
+
+    public static void validate(String[] author) {
+        if (author[0].matches("[a-zA-Z]+") && author[1].matches("[a-zA-Z]+")) {
+
+        } else {
+            throw new AuthorValidationException("Wrong First or Last names value at document: " + author.toString());
+        }
+
+
+    }
+}
+
+

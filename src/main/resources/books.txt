@@ -9,7 +9,7 @@ Jack,London,The Cruise of the Dazzler,1902
 Jack,London,A Daughter of the Snows,1902
 Jack,London,The Call of the Wild,1903
 Jack,London,The Kempton-Wace Letters,1903
-Jack,London,The Sea-Wolf,1904
+null,London,The Sea-Wolf,1904
 Jack,London,The Game,1905
 Jack,London,White Fang,1906
 Jack,London,Before Adam,1907
