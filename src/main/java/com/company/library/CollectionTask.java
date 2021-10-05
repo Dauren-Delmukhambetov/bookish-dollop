@@ -22,7 +22,7 @@ public class CollectionTask {
 
         // read data from file
 
-        final var lines = getLinesFromFile("book.txt");
+        final var lines = getLinesFromFile("books.txt");
         System.out.printf("Lines number we got from file is %d %n", lines.size());
 
 
@@ -121,15 +121,24 @@ public class CollectionTask {
     public static List<Book> instantiateBooks(List<String> lines) {
         //TODO parse string, instantiate Author and Book classes and return list of books
         List<Book> bookList = new ArrayList<>();
+        Pattern exampleFirstAndLastName = Pattern.compile(("[a-zA-Z]+,[a-zA-Z]"), Pattern.CASE_INSENSITIVE);
 
 
             for (String e : lines) {
                 String[] columns = e.split(",");
                 try {
-                    bookList.add(new Book(new Author(columns[0], columns[1]), columns[2], Integer.parseInt(columns[3])));
+                    if(columns[0].matches("[a-zA-Z]") && columns[1].matches("[a-zA-Z]")){
+                        bookList.add(new Book(new Author(columns[0], columns[1]), columns[2], Integer.parseInt(columns[3])));
+                    }else{
+                        throw new AuthorNullValueException();
+                    }
+
                 } catch (NumberFormatException ex) {
                     System.err.println("Wrong data format at document: " + e);
+                } catch (AuthorNullValueException ey) {
+                    System.err.println("Wrong First or Last names value");
                 }
+
             }
             return bookList;
 
