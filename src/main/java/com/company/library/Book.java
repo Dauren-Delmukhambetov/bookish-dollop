@@ -13,7 +13,14 @@ public class Book extends Edition implements Comparable<Book> {
 
     protected Book(int pageNumber, Author author, String printingHouse, int publishingYear, String genre, String bookName) {
         this(pageNumber, author, printingHouse, publishingYear, genre, bookName, 0);
+        if (author == null) {
+            throw new AuthorValidationException("author is null");
+
+        }
+
+
     }
+
 
     @Override
     public boolean equals(Object o) {

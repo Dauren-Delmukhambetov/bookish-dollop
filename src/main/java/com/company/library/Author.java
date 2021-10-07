@@ -63,4 +63,16 @@ public class Author {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public void validate() {
+        if (firstName == null || lastName == null) {
+            throw new AuthorValidationException("First name or Last name is Null");
+
+        }
+        if (!firstName.matches("[a-zA-Z]+") || !lastName.matches("[a-zA-Z]+")) {
+            throw new AuthorValidationException("Wrong First or Last names value at document: " + firstName + lastName);
+        }
+
+
+    }
 }
