@@ -9,14 +9,87 @@ import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
 
-public class CollectionTask {
+public class CollectionTask implements Runnable{
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    public static void main(String[] args) {
+        new CollectionTask();
+    }
+    Thread thread;
+    CollectionTask() {
+        thread = new Thread(this);
+        thread.start();
+
+    }
+
+    private Map<Author, List<Book>> groupBooksByAuthors(List<Book> books) {
+        return books.stream()
+                .collect(Collectors.groupingBy(book -> book.author));
+    }
+
+    private Collection<Author> findUniqueAuthors(List<Book> books) {
+        return books.stream()
+                .map(book -> book.author)
+                .collect(Collectors.toSet());
+    }
+
+    private Collection<Book> findUniqueBooks(List<Book> books) {
+        return books.stream().distinct().collect(Collectors.toList());
+
+    }
+
+    public List<String> getLinesFromFile(final String filepath) throws IOException, URISyntaxException {
+
+        try {
+            return Files.lines(
+                            Path.of(
+                                    CollectionTask.class
+                                            .getClassLoader()
+                                            .getResource(filepath)
+                                            .toURI()
+                            )
+                    )
+                    .toList();
+        } catch (NullPointerException e) {
+            System.err.println("File 'books.txt' doesn't found");
+            return emptyList();
+        }
+    }
+
+
+    public List<Book> instantiateBooks(List<String> lines) {
+        List<Book> bookList = new ArrayList<>();
+        for (String e : lines) {
+            String[] columns = e.split(",");
+            try {
+                //validate(columns);
+                Author author = new Author(columns[0],columns[1]);
+                author.validate();
+                bookList.add(new Book(author, columns[2], Integer.parseInt(columns[3])));
+
+            } catch (NumberFormatException ex) {
+                System.err.println("Wrong data format at document: " + e);
+            } catch (AuthorValidationException ey) {
+                System.err.println(ey.getMessage());
+            }
+        }
+        return bookList;
+
+    }
+
+    @Override
+    public void run() {
         System.out.println("This task demos Java Collection Framework");
 
         // read data from file
 
-        final var lines = getLinesFromFile("books.txt");
+         List<String> lines = null;
+        try {
+            lines = getLinesFromFile("books.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         System.out.printf("Lines number we got from file is %d %n", lines.size());
 
         // instantiate objects
@@ -41,61 +114,6 @@ public class CollectionTask {
                     authorBooks.size(),
                     authorBooks);
         });
-
-    }
-
-    private static Map<Author, List<Book>> groupBooksByAuthors(List<Book> books) {
-        return books.stream()
-                .collect(Collectors.groupingBy(book -> book.author));
-    }
-
-    private static Collection<Author> findUniqueAuthors(List<Book> books) {
-        return books.stream()
-                .map(book -> book.author)
-                .collect(Collectors.toSet());
-    }
-
-    private static Collection<Book> findUniqueBooks(List<Book> books) {
-        return books.stream().distinct().collect(Collectors.toList());
-
-    }
-
-    public static List<String> getLinesFromFile(final String filepath) throws IOException, URISyntaxException {
-
-        try {
-            return Files.lines(
-                            Path.of(
-                                    CollectionTask.class
-                                            .getClassLoader()
-                                            .getResource(filepath)
-                                            .toURI()
-                            )
-                    )
-                    .toList();
-        } catch (NullPointerException e) {
-            System.err.println("File 'books.txt' doesn't found");
-            return emptyList();
-        }
-    }
-
-
-    public static List<Book> instantiateBooks(List<String> lines) {
-        List<Book> bookList = new ArrayList<>();
-        for (String e : lines) {
-            String[] columns = e.split(",");
-            try {
-                //validate(columns);
-                Author author = new Author(columns[0],columns[1]);
-                author.validate();
-                bookList.add(new Book(author, columns[2], Integer.parseInt(columns[3])));
-
-            } catch (NumberFormatException ex) {
-                System.err.println("Wrong data format at document: " + e);
-            } catch (AuthorValidationException ey) {
-                System.err.println(ey.getMessage());
-            }
-        }
-        return bookList;
 
     }
 }
