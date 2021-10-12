@@ -1,19 +1,48 @@
 package com.company.library;
 
+import java.util.*;
+import java.util.function.BiConsumer;
+
 public class ConcurrencyTask {
 
-    public static void main(String[] args) {
-        System.out.printf("%s: This task demos Java Concurrency", Thread.currentThread().getName());
+    public static void main(String[] args) throws InterruptedException {
+        var time = System.currentTimeMillis();
+        System.out.printf("%s: This task demos Java Concurrency %n", Thread.currentThread().getName());
 
-        //todo initialize two instance of CollectionTask that refers to two different input file, e.g. "books.txt", "novels.txt"
+        //parallel
+        var booksDocumentCollection = new CollectionTask("books.txt");
+        var novelsDocumentCollection = new CollectionTask("novels.txt");
+        booksDocumentCollection.start();
+        novelsDocumentCollection.start();
+        booksDocumentCollection.waitAuthors();
+        novelsDocumentCollection.waitAuthors();
 
-        //todo run both task consequently and in parallel (you can comment out of the the options)
+        //consequently
+        /*var booksDocumentCollection = new CollectionTask("books.txt");
+        booksDocumentCollection.start();
+        booksDocumentCollection.join();
+        var novelsDocumentCollection = new CollectionTask("novels.txt");
+        novelsDocumentCollection.start();
+        novelsDocumentCollection.join();*/
 
-        //todo get result of analytics ran on those files as a map of author -> publication collection
+        Map<Author, Set<Book>> authors = new HashMap<>(novelsDocumentCollection.getAllAuthors());
+        booksDocumentCollection.getAllAuthors().forEach((author, books) ->
+                authors.merge(author, books, (value1, value2) -> {
+                    value1.addAll(value2);
+                    return value1;
+                }));
 
-        //todo merge the results of two task into one
+        authors.entrySet().stream().forEach(entry -> {
+            var author = entry.getKey();
+            var authorBooks = entry.getValue();
+                        System.out.printf("Author %s %s has %d books in library: %s %n",
+                    author.getFirstName(),
+                    author.getLastName(),
+                    authorBooks.size(),
+                    authorBooks);
+        });
 
-        //todo print out the result
+        System.out.println("Program completed in " + (System.currentTimeMillis() - time) + " ms");
     }
 
 }
