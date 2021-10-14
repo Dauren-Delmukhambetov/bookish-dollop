@@ -1,0 +1,8 @@
+Joanne,Rowling,Harry Potter and Yellow apple,2009
+Lev,Tolstoy,War and peace,1908
+Jack,London,A Daughter of the Snows,1902
+Jack,London,The Call of the Wild,1903
+Jack,London,The Sea-Wolf,1904
+Charles,Dickens,Oliver Twist,1838
+Charles,Dickens,Bleak House,1852
+Joanne,Rowling,Harry Potter and the Philosopher's Stone,1997
